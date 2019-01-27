@@ -1,3 +1,44 @@
-(function(a,b){if(!b.getElementById("comment-holder")){return}var c=b.getElementById("comment-holder"),d="",e=c.children[0].value,f=" <img class='emo' width='16' height='16' src='https://latitudu.googlecode.com/svn/emo/",g=".png'/>";e=e.replace(/\/\/lh4\.googleusercontent\.com\/\-nxgZmVx9WAM\/AAAAAAAAAAI\/AAAAAAAADzc\/tXN-hVU4UhE\/.*?\/photo\.jpg/g,"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==").replace(/\/s[0-9]+(\-c)?\//ig,"/s42-c/").replace(/<p>/,"<p> ").replace(/(<br ?\/?>)/ig,"$1 ").replace(/ \(y\)/g,f+"0"+g).replace(/ :-?\(/g,f+"1"+g).replace(/ :('|&#39;)-?\(/g,f+"2"+g).replace(/ :('|&#39;)-?\)/g,f+"3"+g).replace(/ :-D/g,f+"5"+g).replace(/ :-?\*/g,f+"6"+g).replace(/ :D/g,f+"7"+g).replace(/ (>|&gt;)\.+?(<|&lt;)/g,f+"9"+g).replace(/ 0\_0/g,f+"10"+g).replace(/ \^\_?\^/g,f+"11"+g).replace(/ \*o\*/ig,f+"12"+g).replace(/ (<|&lt;)3/g,f+"13"+g).replace(/ (>|&gt;):\(/g,f+"14"+g).replace(/ :-?\)/g,f+"15"+g).replace(/ =D/g,f+"16"+g).replace(/ ;-?\)/g,f+"17"+g).replace(/ (\-\_?\-'\??|'\-\_?\-\??)/g,f+"18"+g).replace(/ :-?3/g,f+"19"+g).replace(/ T\_T/g,f+"20"+g).replace(/ ;-?p/ig,f+"22"+g).replace(/ :-?p/ig,f+"23"+g).replace(/ 0:-?\)/g,f+"24"+g).replace(/ :-?\@/g,f+"25"+g).replace(/ :-?(\/|\\)/g,f+"26"+g).replace(/ o\_O/g,f+"27"+g).replace(/ O\_o/g,f+"28"+g).replace(/ :v/ig,f+"29"+g).replace(/ B-?(\)|D)/ig,f+"30"+g).replace(/\[img\](.*?)\[\/img\]/ig,"<a target='_blank' title='Ukuran Penuh' href='$1'><img alt='Loading...' src='$1'></a>").replace(/<b rel="quote">(.*?)<\/b>/ig,"<blockquote>$1</blockquote>").replace(/<i rel="pre">(.*?)<\/i>/ig,"<pre>$1</pre>").replace(/<i rel="code">(.*?)<\/i>/ig,"<code>$1</code>").replace(/Ukuran Penuh\' href=\'(.*?)\/s42\-c(.*?)\'/g,"Ukuran Penuh\' href=\'$1\/s1600$2\'");c.innerHTML=e})(window,document);
+//Global setting
+Config.maxThreadDepth = 6;
+var Cur_Cform_Hdr = '.comment_form';
+var Cur_Cform_Url = $('#comment-editor')
+    .attr('src');
 
-(function(){var e=null,n=document.getElementById("comment-holder");if(items&&items.length>0){e=parseInt(items[items.length-1].timestamp)+1}var p=function(t){if(t.gd$extendedProperty){for(var s in t.gd$extendedProperty){if(t.gd$extendedProperty[s].name=="blogger.contentRemoved"){return'<span class="deleted-comment">'+t.content.$t+"</span>"}}}return t.content.$t};var k=function(v){e=null;var z=[];if(v&&v.feed&&v.feed.entry){for(var w=0,A;A=v.feed.entry[w];w++){var y={};var s=/blog-(\d+).post-(\d+)/.exec(A.id.$t);y.id=s?s[2]:null;y.body=p(A);y.timestamp=Date.parse(A.published.$t)+"";if(A.author&&A.author.constructor===Array){var t=A.author[0];if(t){y.author={name:(t.name?t.name.$t:undefined),profileUrl:(t.uri?t.uri.$t:undefined),avatarUrl:(t.gd$image?t.gd$image.src:undefined)}}}if(A.link){if(A.link[2]){y.link=y.permalink=A.link[2].href}if(A.link[3]){var x=/.*comments\/default\/(\d+)\?.*/.exec(A.link[3].href);if(x&&x[1]){y.parentId=x[1]}}}y.deleteclass="item-control blog-admin";if(A.gd$extendedProperty){for(var u in A.gd$extendedProperty){if(A.gd$extendedProperty[u].name=="blogger.itemClass"){y.deleteclass+=" "+A.gd$extendedProperty[u].value}else{if(A.gd$extendedProperty[u].name=="blogger.displayTime"){y.displayTime=A.gd$extendedProperty[u].value}}}}z.push(y)}}return z};var h=function(u){if(c()){var t=config.feed+"?alt=json&v=2&orderby=published&reverse=false&max-results=50";if(e){t+="&published-min="+new Date(e).toISOString()}window.bloggercomments=function(w){var v=k(w);e=v.length<50?null:parseInt(v[v.length-1].timestamp)+1;u(v);window.bloggercomments=null};t+="&callback=bloggercomments";var s=document.createElement("script");s.type="text/javascript";s.src=t;document.getElementsByTagName("head")[0].appendChild(s)}};var c=function(){return !!e};var a=function(s,u){if("iswriter"==s){var t=!!u.author&&u.author.name==config.authorName&&u.author.profileUrl==config.authorUrl;return t?"true":""}else{if("deletelink"==s){return config.baseUri+"/delete-comment.g?blogID="+config.blogId+"&postID="+u.id}else{if("deleteclass"==s){return u.deleteclass}}}return""};var f=null;var o=null;var j=undefined;var d=function(s,t){if(f==null){f=document.getElementById("comment-editor");if(f!=null){f.style.height="250px";f.style.display="block";o=f.src.split("#")}}if(f&&(s!==j)){f.src=o[0]+(s?"&parentID="+s:"")+"#"+o[1];document.getElementById(t).insertBefore(document.getElementById("threaded-comment-form"),null);j=s}};var b=(window.location.hash||"#").substring(1);var m,i;if(/^comment-form_/.test(b)){m=b.substring("comment-form_".length)}else{if(/^c[0-9]+$/.test(b)){i=b.substring(1)}}var g={maxDepth:config.maxThreadDepth};var q={id:config.postId,data:items,loadNext:h,hasMore:c,getMeta:a,onReply:d,rendered:true,initComment:i,initReplyThread:m,config:g,messages:msgs};var r=function(){if(window.goog&&window.goog.comments){var s=n;window.goog.comments.render(s,q)}};if(window.goog&&window.goog.comments){r()}else{window.goog=window.goog||{};window.goog.comments=window.goog.comments||{};window.goog.comments.loadQueue=window.goog.comments.loadQueue||[];window.goog.comments.loadQueue.push(r)}})();
+cur_url = window.location.href;
+search_formid = '#comment-form_';
+search_index = cur_url.indexOf(
+    search_formid);
+if (search_index != -1) {
+    ret_id = cur_url.substring(
+        search_index + search_formid.length);
+    Display_Reply_Form('#rc' + ret_id)
+}
+for (var i = 0; i < Items.length; i++) {
+    if ('parentId' in Items[i]) {
+        var par_id = Items[i].parentId;
+        var par_level = parseInt($('#c' +
+                par_id + ':first')
+            .attr('level'));
+        $('#c' + par_id +
+            ' .comment_child:first')
+            .html(function (index, oldhtml) {
+                var child_id = Items[i].id;
+                if (par_level >= Config.maxThreadDepth) {
+                    $('#c' + child_id +
+                        ':first .comment_reply')
+                        .remove()
+                }
+                var child_html = $('#c' + child_id +
+                    ':first')
+                    .html();
+                child_html =
+                    '<div class="comment_wrap" id="c' +
+                    child_id + '" level="' + (
+                        par_level + 1) + '">' + child_html +
+                    '</div>';
+                $('#c' + child_id)
+                    .remove();
+                return (oldhtml + child_html)
+            })
+    }
+}      
