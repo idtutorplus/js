@@ -1,6 +1,6 @@
 function replaceContent(id) {
         var a = document.getElementById(id).innerHTML,
-                b = "https://idplus.googlecode.com/svn/trunk/images/emotion/",
+                b = "https://github.com/idtutorplus/images/tree/master/emotion/",
                 c = " <img src='",
                 d = "class='emo delayLoad'\/>";
         document.body.spellcheck = false;
